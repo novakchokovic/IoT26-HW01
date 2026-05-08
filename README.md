@@ -1,58 +1,101 @@
-# 5월 6일 16:00~18:00
+# Raspberry Pi SSH & LED Project
 
-1. sd카드에 라즈베리파이 os 깔기
-username: iot
-hostname: 임현준의 iPhone
-             pw: abcd1234         으로 설정
-2. ssh 연결 시도
-→실패
--실패원인) 핫스팟 신호가 약해 불안정한 네트워크였음.
-                    putty를 활용하려고 하였지만 호환 오류가 발생하였음.
-→다음날 개인카페에서 보안 네트워크 사용하기로 함.
+## 📅 5월 6일 16:00 ~ 18:00
 
-# 5월 7일 13:00~16:00
+### 1. Raspberry Pi OS 설치
 
-1. sd카드에 라즈베리파이 os 깔기
-username: pi
-hostname: raspberrypi
-             pw: 김민준         으로 설정
-2. ssh 연결 시도
--1) sd카드 부트에 ssh 파일 만들고
--2) sd카드 부트에 wpa_supplicant.conf 설정 파일 만들고
-      다음과 같은 코드 넣기
-    
-    > ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
-    country=KR
-    network={
+SD 카드에 Raspberry Pi OS 설치 후 아래와 같이 설정하였다.
+
+- Username: `iot`
+- Hostname: `임현준의 iPhone`
+- Password: `abcd1234`
+
+---
+
+### 2. SSH 연결 시도
+
+→ 실패
+
+#### 실패 원인
+
+- 핫스팟 신호가 약해 네트워크가 불안정했음
+- PuTTY 사용 중 호환 오류 발생
+
+#### 해결 방향
+
+- 다음날 개인 카페의 보안 네트워크를 사용하여 다시 시도하기로 함
+
+---
+
+# 📅 5월 7일 13:00 ~ 16:00
+
+## 1. Raspberry Pi OS 재설치
+
+- Username: `pi`
+- Hostname: `raspberrypi`
+- Password: `김민준`
+
+---
+
+## 2. SSH 연결 시도
+
+### (1) boot 폴더에 `ssh` 파일 생성
+
+### (2) boot 폴더에 `wpa_supplicant.conf` 파일 생성
+
+다음 코드를 작성하였다.
+
+```conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=KR
+
+network={
     ssid="U+NetD49C_5G"
     psk="4AJACE#679"
     key_mgmt=WPA-PSK
-    }
-    > 
-    
-    →성공
-    
-    [처음으로 ssh 접속한 순간](attachment:ce644c28-7fb9-4ec8-a0fd-416888029da2:KakaoTalk_20260508_214539704.mp4)
-    
-    처음으로 ssh 접속한 순간
-    
+}
+```
 
-![개인카페 보안네트워크](attachment:dbe2a0c1-456f-4f59-ae0e-9cb089b5915e:KakaoTalk_20260508_214533214.jpg)
+→ SSH 연결 성공
 
-개인카페 보안네트워크
+---
 
-## **Control Raspberry Pi Digital Outputs with Python (LED)**
+### 📷 처음 SSH 접속에 성공한 모습
 
-### 1. 조립하기
+![SSH Success](images/ssh_success.jpg)
 
-- 홈페이지를 참고하여 똑같이 만들
+---
 
-### 2. Python 파일 만들기
+### 🎞️ SSH 접속 성공 GIF
 
-- nano blinking_led.py
+![SSH Connect GIF](images/ssh_connect.gif)
 
-### **3.** 코드 작성
+---
+
+### 📷 개인 카페 보안 네트워크
+
+![Cafe Network](images/cafe_network.jpg)
+
+---
+
+# 💡 Control Raspberry Pi Digital Outputs with Python (LED)
+
+## 1. 회로 조립
+
+- 참고 사이트를 보고 LED 회로를 동일하게 구성하였다.
+
+---
+
+## 2. Python 파일 생성
+
+```bash
+nano blinking_led.py
+```
+
+---
+
+## 3. 코드 작성
 
 ```python
 from gpiozero import LED
@@ -70,14 +113,22 @@ while True:
     sleep(1)
 ```
 
-![나노 편집기에서 코드를 저장한 모습](attachment:44598619-bd59-4547-8156-9f462b2c75f0:7986c9ac-84b9-4330-8f79-b0e87a13c4f0.png)
+---
 
-나노 편집기에서 코드를 저장한 모습
+### 📷 nano 편집기에서 저장한 모습
 
-### 4. 실행
+![Nano Editor](images/nano_editor.png)
 
-- python3 blinking_led.py
+---
 
-[실행했을때 작동되는 모습](attachment:3295afe1-334d-4fab-b391-6f09d55f437f:KakaoTalk_20260508_214538228.mp4)
+## 4. 실행
 
-실행했을때 작동되는 모습
+```bash
+python3 blinking_led.py
+```
+
+---
+
+### 🎞️ LED 실행 GIF
+
+![LED Demo](images/led_demo.gif)
