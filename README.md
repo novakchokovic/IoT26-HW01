@@ -61,12 +61,6 @@ network={
 
 ---
 
-### 📷 처음 SSH 접속에 성공한 모습
-
-![SSH Success](images/ssh_success.jpg)
-
----
-
 ### 🎞️ SSH 접속 성공 GIF
 
 ![SSH Connect GIF](images/ssh_connect.gif)
